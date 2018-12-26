@@ -1,0 +1,8 @@
+注册：请求参数 email 修改为 name
+矿池列表：返回参数 hashrate 类型由string 改为 HashrateDto实体
+矿池信息：返回参数 hashrate 类型由string 改为 HashrateDto实体
+矿池用户：返回参数 workerHashrate 类型由string 改为 HashrateDto实体
+网络资讯：返回参数 networkHashrate 类型由string 改为 HashrateDto实体
+错误码：新增错误码 20008 [DataIncompleteness] 资料不完整
+
+* HashrateDto 包含｛hashrate 算力值  hashrateUnit 算力值单位 coinUnit货币单位｝ 三个值
