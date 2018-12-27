@@ -124,6 +124,7 @@ const Session = db.sequelize.define('session_store',{
     },
     session_id:{
         type:Sequelize.STRING,
+        primaryKey:true,
         allowNull:false,
     },
     expiration_time:{

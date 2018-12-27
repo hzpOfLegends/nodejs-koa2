@@ -3,18 +3,25 @@ const path = require('path')
 const bodyParser = require('koa-bodyparser');
 const config = require('./config');
 const MysqlStore = require('koa-mysql-session');
-const session = require('koa-session-minimal');
+// const session = require('koa-session-minimal');
 const koaBody = require('koa-body');
 const app = new koa()
 // 路由文件名
 const router_file_name = ['signup','login','user_count','send_file','test','save_user_info']
 // session存储配置
-const sessionMysqlConfig = {
-    user: config.sequelize.username,
-    password: config.sequelize.password,
-    database: config.sequelize.database,
-    host: config.sequelize.host,
+// const sessionMysqlConfig = {
+//     user: config.sequelize.username,
+//     password: config.sequelize.password,
+//     database: config.sequelize.database,
+//     host: config.sequelize.host,
+// }
+async function logger(ctx, next) {
+  const startDate = new Date();
+  next();
+  console.log(`method: ${ctx.method} code: ${ctx.status} time:${new Date() -startDate}ms`);
 }
+app.use( logger )
+// app.set("SECRET","verfiy")
 app.use(koaBody({
     multipart: true,
     formidable: {
@@ -22,10 +29,10 @@ app.use(koaBody({
     }
 }));
 // 配置session中间件
-app.use(session({
-    key: 'USER_SID',
-    store: new MysqlStore(sessionMysqlConfig)
-}))
+// app.use(session({
+//     key: 'USER_SID',
+//     store: new MysqlStore(sessionMysqlConfig)
+// }))
 app.use(bodyParser())
 // 注册路由
 for(let item of router_file_name){

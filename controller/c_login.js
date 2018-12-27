@@ -4,7 +4,6 @@ exports.postLogin = async ctx => {
     await userModel.login(name,pass)
     .then(res =>{
         ctx.body = res
-        
     })
     .catch(err =>{
         console.log("login",err)
